@@ -1,0 +1,28 @@
+{
+  "name": "ansinception",
+  "version": "0.1.0",
+  "description": "Colorful exception handler for Node.js with CoffeeScript support and improved nodemon/supervisor compatibility",
+  "author": {
+    "name": "Dennis Kehrig"
+  },
+  "keywords": [
+    "exception",
+    "handler",
+    "node",
+    "nodemon",
+    "supervisor",
+    "coffeescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DennisKehrig/ANSInception.git"
+  },
+  "bugs": "https://github.com/DennisKehrig/ANSInception/issues",
+  "engines": {
+    "node": "*"
+  },
+  "devDependencies": {
+    "coffee-script": ">=1.3.0"
+  },
+  "main": "./lib/exception-handler"
+}
