@@ -3,7 +3,7 @@ ANSInception
 
 Colorful exception handler for Node.js with CoffeeScript support and improved nodemon/supervisor compatibility
 
-![Screenshot](screenshot.png)
+![Screenshot](https://github.com/DennisKehrig/ANSInception/raw/master/screenshot.png)
 
 Features
 --------
