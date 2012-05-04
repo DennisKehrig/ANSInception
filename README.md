@@ -14,7 +14,7 @@ Features
 * Compiles CoffeeScript to show the actual offending code (otherwise the line numbers don't make sense)
 * Highlights the file name in stack trace paths
 * Uses different colors depending on the location of the code
-  (<span style="background-color:black;color:#0f0">your code</span>, <span style="background-color:black;color:#ff0">local module</span>, <span style="background-color:black;color:#f0f">global module/node.js internals</span>)
+  (<span style="background-color:black;color:#0f0">green:</span> your code, <span style="background-color:black;color:#ff0">yellow:</span> local module, <span style="background-color:black;color:#f0f">pink:</span> global module/node.js internals)
 
 Unfortunately registering with 'uncaughtException' has no effect until the next tick.
 So in order to benefit from the exception handler right away, you need to postpone execution of your code.
