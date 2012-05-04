@@ -44,7 +44,15 @@ format1 = /^\s*at (.*) \(([^\)]+):(\d+):(\d+)\)$/
 # at <path>:<line>:<column>
 format2 = /^\s*at ()([^\)]+):(\d+):(\d+)$/
 # The exception handler
-module.exports = (exception) ->
+
+exports = module.exports = (callback) ->
+	if callback instanceof Error
+		exports.handler callback
+	else
+		process.on 'uncaughtException', exports.handler
+		process.nextTick callback
+
+exports.handler = (exception) ->
 	
 	# Start off with how the app was started in the first place
 	console.log "\n#{baseColor}      ,-- $ #{brightCyan}#{process.argv.join ' '}#{reset}"
@@ -74,7 +82,6 @@ module.exports = (exception) ->
 	# Delay exiting when an exception occurs so console.log calls that occured
 	# just before the error are also printed by nodemon, supervisor, etc.
 	setTimeout ->
-		console.log "Now quitting"
 		process.exit 1
 	, 500
 
@@ -121,6 +128,7 @@ logStackEntry = (context, file, lineNumber, columnNumber) ->
 	
 	# Read two lines before and after the offending one
 	for i in [(lineIndex-extraLines)..(lineIndex+extraLines)]
+		continue if i < 0
 		break if i >= lines.length
 		
 		numColor = darkWhite
