@@ -37,6 +37,7 @@ brightWhite		= white		+ bright
 # Configuration
 baseColor		= brightWhite
 extraLines		= 2
+delayExit		= 1000
 
 # Two formats for the stack trace:
 # at <context> (<path>:<line>:<column>)
@@ -83,7 +84,7 @@ exports.handler = (exception) ->
 	# just before the error are also printed by nodemon, supervisor, etc.
 	setTimeout ->
 		process.exit 1
-	, 500
+	, delayExit
 
 logStackEntry = (context, file, lineNumber, columnNumber) ->
 	# Working directory
