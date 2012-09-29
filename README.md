@@ -18,7 +18,7 @@ Features
 
 Unfortunately registering with 'uncaughtException' has no effect until the next tick.
 So in order to benefit from the exception handler right away, you need to postpone execution of your code.
-You can either do this manually or use the convience version (see below)
+You can either do this manually or use the convenience version (see below)
 
 Usage with CoffeeScript
 -----------------------
