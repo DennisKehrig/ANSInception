@@ -59,9 +59,16 @@ exports.handler = (exception) ->
 	console.log "\n#{baseColor}      ,-- $ #{brightCyan}#{process.argv.join ' '}#{reset}"
 	
 	# Split the stack into lines
-	stack		= exception.stack.split "\n"
-	# Remove the first line and store it as the message
-	message		= stack.shift()
+	stack = exception.stack.split "\n"
+	
+	# Collect the lines with the error message
+	messageLines = []
+	for entry in stack
+		break if entry.match(format1) or entry.match(format2)
+		messageLines.push entry
+	
+	# Remove the message lines from the stack
+	stack.splice 0, messageLines.length
 	
 	# Print the stack chronologically
 	for entry in stack.reverse()
@@ -77,8 +84,13 @@ exports.handler = (exception) ->
 		# Just dump the line if we don't recognize it
 		else
 			console.log "#{baseColor}      `-> #{entry}#{reset}"
+	
+	errorStyle = "#{darkRed}|#{brightWhite} "
 
-	console.log "#{baseColor}      `-> #{brightRed}#{message}#{reset}\n"
+	console.log "#{baseColor}      v#{reset}"
+	console.log "#{darkRed},---------------------------------------------------------------------------#{reset}"
+	console.log "#{errorStyle}" + messageLines.join "\n#{errorStyle}"
+	console.log "#{darkRed}`---------------------------------------------------------------------------#{reset}"
 	
 	# Delay exiting when an exception occurs so console.log calls that occured
 	# just before the error are also printed by nodemon, supervisor, etc.
